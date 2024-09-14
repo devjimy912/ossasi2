@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .header img {
+        margin-right: 10px;
+      }
+
+      .header h2 {
+        font-size: 24px;
+      }
+
+      .description {
+        color: #6c757d;
+        margin-bottom: 40px;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+      }
+
+      .cart-summary {
+        width: 33.33%;
+        margin-left: 20px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+      }
+
+      .cart-summary h4 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .cart-summary ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .cart-summary ul li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .cart-summary ul li:last-child {
+        border-bottom: none;
+        font-weight: bold;
+      }
+
+      .promo-form {
+        display: flex;
+        margin-top: 20px;
+      }
+
+      .promo-form input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .promo-form button {
+        padding: 10px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .form-section {
+        width: 66.66%;
+      }
+
+      .form-section h4 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-section .name-fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-section .single-line {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .form-section form div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-section form div label {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .form-section form div input,
+      .form-section form div select {
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+      }
+
+      .form-section hr {
+        margin: 40px 0;
+      }
+
+      .payment-methods {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .payment-methods div {
+        display: flex;
+        align-items: center;
+      }
+
+      .payment-methods div input {
+        margin-right: 10px;
+      }
+
+      button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      footer ul li {
+        margin: 0 10px;
+      }
+
+      footer ul li a {
+        text-decoration: none;
+        color: #007bff;
+      }
+
+      .invalid-feedback {
+        color: red;
+        display: none;
+      }
+
+      .invalid-feedback.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <div class="header">
+          <img
+            src="./Checkout example · Bootstrap v5.2_files/bootstrap-logo.svg"
+            alt=""
+            width="72"
+            height="57"
+          />
+          <h2>Checkout form</h2>
+          <p class="description">
+            Below is an example form built entirely with Bootstrap’s form
+            controls. Each required form group has a validation state that can be
+            triggered by attempting to submit the form without completing it.
+          </p>
+        </div>
+
+        <div class="main-content">
+          <div class="cart-summary">
+            <h4>
+              <span>Your cart</span>
+              <span>3</span>
+            </h4>
+            <ul>
+              <li>
+                <div>
+                  <h6>Product name</h6>
+                  <small>Brief description</small>
+                </div>
+                <span>$12</span>
+              </li>
+              <li>
+                <div>
+                  <h6>Second product</h6>
+                  <small>Brief description</small>
+                </div>
+                <span>$8</span>
+              </li>
+              <li>
+                <div>
+                  <h6>Third item</h6>
+                  <small>Brief description</small>
+                </div>
+                <span>$5</span>
+              </li>
+              <li>
+                <div>
+                  <h6>Promo code</h6>
+                  <small>EXAMPLECODE</small>
+                </div>
+                <span>−$5</span>
+              </li>
+              <li>
+                <span>Total (USD)</span>
+                <strong>$20</strong>
+              </li>
+            </ul>
+
+            <form class="promo-form">
+              <input type="text" placeholder="Promo code" />
+              <button type="submit">Redeem</button>
+            </form>
+          </div>
+
+          <div class="form-section">
+            <h4>Billing address</h4>
+            <form id="checkoutForm" novalidate="">
+              <div class="name-fields">
+                <div>
+                  <label for="firstName">First name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    placeholder=""
+                    value=""
+                    required=""
+                  />
+                  <div>Valid first name is required.</div>
+                </div>
+
+                <div>
+                  <label for="lastName">Last name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    placeholder=""
+                    value=""
+                    required=""
+                  />
+                  <div>Valid last name is required.</div>
+                </div>
+              </div>
+
+              <div class="single-line">
+                <div>
+                  <label for="username">Username</label>
+                  <div>
+                    <span>@</span>
+                    <input
+                      type="text"
+                      id="username"
+                      placeholder="Username"
+                      required=""
+                    />
+                    <div class="invalid-feedback">Username must be 4 to 12 characters long.</div>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="email">Email <span>(Optional)</span></label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                  />
+                  <div>
+                    Please enter a valid email address for shipping updates.
+                  </div>
+                </div>
+
+                <div>
+                  <label for="address">Address</label>
+                  <input
+                    type="text"
+                    id="address"
+                    placeholder="1234 Main St"
+                    required=""
+                  />
+                  <div>Please enter your shipping address.</div>
+                </div>
+
+                <div>
+                  <label for="country">Country</label>
+                  <select id="country" required="">
+                    <option value="">Choose...</option>
+                    <option>United States</option>
+                  </select>
+                  <div>Please select a valid country.</div>
+                </div>
+
+                <div>
+                  <label for="state">State</label>
+                  <select id="state" required="">
+                    <option value="">Choose...</option>
+                    <option>California</option>
+                  </select>
+                  <div>Please provide a valid state.</div>
+                </div>
+
+                <div>
+                  <label for="zip">Zip</label>
+                  <input type="text" id="zip" placeholder="" required="" />
+                  <div>Zip code required.</div>
+                </div>
+              </div>
+
+              <hr />
+
+              <div class="payment-methods">
+                <div>
+                  <input type="radio" name="paymentMethod" required="" />
+                  <label for="credit">Credit card</label>
+                </div>
+
+                <div>
+                  <input type="radio" name="paymentMethod" required="" />
+                  <label for="debit">Debit card</label>
+                </div>
+
+                <div>
+                  <input type="radio" name="paymentMethod" required="" />
+                  <label for="paypal">PayPal</label>
+                </div>
+              </div>
+
+              <button type="submit">Continue to checkout</button>
+            </form>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2017–2022 Company Name</p>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const usernameInput = document.getElementById('username');
+        const usernameFeedback = usernameInput.nextElementSibling;
+
+        if (usernameInput.value.trim().length >= 4 && usernameInput.value.trim().length <= 12) {
+          usernameInput.classList.remove('is-invalid');
+          usernameFeedback.classList.remove('active');
+          alert('Form submitted successfully!');
+        } else {
+          usernameInput.classList.add('is-invalid');
+          usernameFeedback.classList.add('active');
+          alert('Form submit failure!\nUsername must be 4 to 12');
+        }
+      });
+    </script>
+  </body>
+</html>
