@@ -4,21 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="my.css">
 </head>
 <body>
     <div>
         <h1>Add New</h1>
-        <p>Title</p>
-        <input type="text" id="title" placeholder="title" />
-        <p>Name</p>
-        <input type="text" id="Name" placeholder="Name" />
-        <p>Email</p>
-        <input type="text" id="Email" placeholder="Email" />
-        <p>Date</p>
-        <input type="text" id="Date" placeholder="Date" />
-        <p>Page</p>
-        <button onclick="alert('Item added'); document.location.href='index.html'">Submit</button>
+        <label for="">Title</label>
+        <input
+            type="text"
+            id="title"
+            oninvalid="this.setCustomValidity('Please input Title.')"
+            oninput="this.setCustomValidity('')"
+            required/>
+            <br>
+        <label for="">Name</label>
+        <input
+            type="text"
+            id="name"
+            oninvalid="this.setCustomValidity('Please input Name.')"
+            oninput="this.setCustomValidity('')"
+            required/>
+            <br>
+        <label for="">Email</label>
+        <input
+            type="email"
+            id="email"
+            oninvalid="this.setCustomValidity('Please input Email.')"
+            oninput="this.setCustomValidity('')"
+            required/>
+            <br>
+        <label for="">Date</label>
+        <input
+            type="date"
+            id="date"
+            oninvalid="this.setCustomValidity('Please input Date.')"
+            oninput="this.setCustomValidity('')"
+            required/>
+            <br>
+        <label for="">Page</label>
+        <input
+            type="number"
+            id="page"
+            oninvalid="this.setCustomValidity('Please input Page.')"
+            oninput="this.setCustomValidity('')"
+            required/>
+            <br>
+        <button onclick="login3()">Submit</button>
         <button type="button" onclick="document.location.href='index.html'">Cancel</button>
     </div>
 </body>
 </html>
+
+<script>
+    function login3() {
+        const title = document.querySelector("#title");
+        const name = document.querySelector("#name");
+        const email = document.querySelector("#email");
+        const date = document.querySelector("#date");
+        const page = document.querySelector("#page");
+        if (!title.checkValidity()) {
+            return alert(title.validationMessage);
+        }
+        if (!name.checkValidity()) {
+            return alert(name.validationMessage);
+        }
+        if (!email.checkValidity()) {
+            return alert(email.validationMessage);
+        }
+        if (!date.checkValidity()) {
+            return alert(date.validationMessage);
+        }
+        if (!page.checkValidity()) {
+            return alert(page.validationMessage);
+        }
+        alert("Item added");
+        location.href='index.html';
+    }
+</script>
