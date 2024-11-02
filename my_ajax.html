@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX CRUD</title>
+  <style>
+    body {
+      background-color: #2c2c2c;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #ffa500;
+    }
+    #data-list div {
+      background-color: #3c3c3c;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    p {
+      margin: 5px 0;
+    }
+    input[type="text"], input[type="number"] {
+      background-color: #4c4c4c;
+      color: #f5f5f5;
+      border: 1px solid #666;
+      border-radius: 4px;
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #ffa500;
+      color: #2c2c2c;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 5px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ff8c00;
+    }
+  </style>
+</head>
+<body>
+  <h1>AJAX CRUD 예제</h1>
+  <div id="data-list"></div>
+  <div id="data-count">총 데이터 수: 0개</div>
+  <button onclick="fetchData()">데이터 목록 보기</button>
+
+  <h2>데이터 추가</h2>
+  <input type="text" id="name" placeholder="이름">
+  <input type="text" id="email" placeholder="이메일">
+  <input type="number" id="age" placeholder="나이">
+  <input type="text" id="occupation" placeholder="직업">
+  <button onclick="addData()">추가</button>
+
+  <script>
+    const apiUrl = "http://localhost:3001/data";
+
+    function fetchData() {
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const list = data.map(item => `
+            <div>
+              <p>ID: ${item.id}</p>
+              <p>이름: ${item.name}</p>
+              <p>이메일: ${item.email}</p>
+              <p>나이: ${item.age}</p>
+              <p>직업: ${item.occupation}</p>
+              <button onclick="updateData(${item.id})">수정</button>
+              <button onclick="deleteData(${item.id})">삭제</button>
+            </div>
+          `).join("");
+
+          document.getElementById("data-list").innerHTML = list;
+
+          const countElement = document.getElementById("data-count");
+          countElement.textContent = `총 데이터 수: ${data.length}개`;
+        });
+    }
+
+    function addData() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const age = document.getElementById("age").value;
+      const occupation = document.getElementById("occupation").value;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const maxId = data.length > 0 ? Math.max(...data.map(item => parseInt(item.id))) : 0;
+          const newId = (maxId + 1).toString();
+
+          fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: newId, name, email, age, occupation })
+          }).then(() => fetchData());
+        });
+    }
+
+    function updateData(id) {
+      const newName = prompt("새 이름을 입력하세요:");
+      const newEmail = prompt("새 이메일을 입력하세요:");
+      const newAge = prompt("새 나이를 입력하세요:");
+      const newOccupation = prompt("새 직업을 입력하세요:");
+
+      fetch(`${apiUrl}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newName, email: newEmail, age: newAge, occupation: newOccupation })
+      }).then(() => fetchData());
+    }
+
+    function deleteData(id) {
+      fetch(`${apiUrl}/${id}`, { method: "DELETE" })
+        .then(response => {
+          if (response.ok) {
+            fetchData();
+          } else {
+            console.error("삭제 실패:", response.statusText);
+          }
+        })
+        .catch(error => console.error("오류 발생:", error));
+    }
+    
+  </script>
+</body>
+</html>
